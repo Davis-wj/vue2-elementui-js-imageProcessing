@@ -88,6 +88,9 @@ export default {
           // 对路由进行跳转（进行下一步的操作）
           this.$router.push("/step0" + newValue + "/" + newValue);
         }
+      } else if (newValue == 0) {
+        // 当newValue为0时需要将进度条的数值初始化
+        this.percentage = 0;
       }
     }
   },
