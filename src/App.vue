@@ -3,7 +3,11 @@
     <router-view />
   </div>
 </template>
-
+<script>
+export default {
+  naem: "app"
+};
+</script>
 <style scoped>
 html,
 body {

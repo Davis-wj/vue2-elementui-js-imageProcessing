@@ -1,4 +1,11 @@
 export default {
+  activeChange(state, num = 1) {
+    if (num !== 0) {
+      state.active += num;
+    } else {
+      state.active = 0;
+    }
+  },
   leftShow(state) {
     state.leftShow = !state.leftShow;
   },

@@ -8,6 +8,14 @@
     <div class="body-box">
       <canvas id="myCanvas">抱歉，您的浏览器还不支持canvas。</canvas>
     </div>
+    <div class="button-box">
+      <el-row>
+        <el-col style="display: flex" justify="center">
+          <el-button class="button" @click="next" :span="6">下一步</el-button>
+          <!-- <router-link to="/step02/02" tag="el-button" active-class="button">下一步</router-link> -->
+        </el-col>
+      </el-row>
+    </div>
   </section>
 </template>
 <script>
@@ -26,7 +34,6 @@ export default {
   mounted() {
     // 添加该方法的目的是防止 用户回退操作时导致 canvas 上没有image
     setTimeout(() => {
-      console.log("aaaaa");
       this.drawCanvas(this.$store.getters.imageObj.dataUrl);
     }, 100);
   },
@@ -84,11 +91,35 @@ export default {
     },
     toDataUrl() {
       return this.myCanvas.toDataURL(); // 返回图片的 Base64
+    },
+    /*下一步*/
+    next() {
+      if (Object.keys(this.imgData).length == 0) {
+        this.$message.error("请上传图片！");
+      } else {
+        this.$store.commit("activeChange");
+      }
     }
   }
 };
 </script>
 <style lang="scss" scoped>
+@import "../../assets/css/button.scss";
+
+.bg-purple {
+  background: #d3dce6;
+}
+.bg-purple-light {
+  background: #e5e9f2;
+}
+.body-box {
+  border: 2px solid white;
+  background: rgba(255, 255, 255, 0.6);
+}
+#myCanvas {
+  display: flex;
+  margin: 0 auto;
+}
 .homepage {
   padding: 10px;
   .button-box-flex {

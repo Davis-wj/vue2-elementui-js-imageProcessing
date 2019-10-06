@@ -51,6 +51,9 @@ export default {
       console.log(this.imgData);
       this.context.putImageData(this.imgData, 0, 0);
       this.$store.state.grayImageDate = this.imgData;
+      if (this.$store.state.leftShow != true)
+        // 处理后如果left菜单没有打开自动进行下一步
+        this.$store.commit("activeChange");
     },
     resetEvent() {
       const imgData = util.copyData(this.imgData, this.data);

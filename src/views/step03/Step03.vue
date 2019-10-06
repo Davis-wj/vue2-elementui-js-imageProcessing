@@ -9,6 +9,8 @@
         <el-button class="button" @click="down">矩形面积计算</el-button>
       </el-col>
     </el-row>
+
+    <el-progress :text-inside="true" :stroke-width="24" :percentage="percentage" :status="status"></el-progress>
   </div>
 </template>
 
@@ -19,6 +21,8 @@ export default {
   name: "Step03",
   data() {
     return {
+      percentage: 0,
+      status: "exception",
       mouseEvent: "",
       myCanvas: "",
       width: "",
@@ -73,14 +77,21 @@ export default {
     },
     clickPoint(e) {
       if (this.$store.state.rectArea == 0) {
-        console.log("aaaaawww");
         let op = e.target; //获取目标元素
         //算出鼠标相对元素的位置
         let disX = e.clientX - op.offsetLeft;
         let disY = e.clientY - op.offsetTop;
         this.point.push({ disX, disY });
+        // 修改进度条
+        this.percentage += 25;
+        if (this.point.length == 4) {
+          this.status = "success";
+        }
         console.log(this.point);
       } else {
+        if (this.$store.state.leftShow != true)
+          // 处理后如果left菜单没有打开自动进行下一步
+          this.$store.commit("activeChange");
         this.$message({
           message: "恭喜你，计算成功请进行下一步操作",
           type: "success"

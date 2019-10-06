@@ -40,6 +40,7 @@ export default {
   },
   methods: {
     start() {
+      this.$store.commit("activeChange")
       return this.$router.push('/step01/1')
     }
   },

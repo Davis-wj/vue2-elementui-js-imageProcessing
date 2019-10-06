@@ -8,7 +8,7 @@
     <el-container>
       <el-collapse-transition>
         <el-aside ref="leftHeight" v-show="$store.state.leftShow" hidden-xs-only>
-          <left @next="leftNext" />
+          <left />
         </el-aside>
       </el-collapse-transition>
       <el-main>
@@ -43,24 +43,35 @@ export default {
       this.clientHeight = `${document.documentElement.clientHeight}`;
     };
   },
+  computed: {
+    // storeStateActiveValue() {
+    //   return this.$store.state.active;
+    // }
+  },
   watch: {
     // 如果 `clientHeight` 发生改变，这个函数就会运行
     clientHeight: function() {
       this.changeFixed(this.clientHeight);
     }
+    // storeStateActiveValue(newValue, oldValue) {
+    //   //当store中state的active值改变时 跳转路由
+    //   console.log(
+    //     "Store Active NewValue: " +
+    //       newValue +
+    //       " Store Active OldValue: " +
+    //       oldValue
+    //   );
+    //   if (newValue && newValue !== 0) {
+    //     this.$router.push("/step0" + newValue + "/" + newValue);
+    //   }
+    // }
   },
   methods: {
     changeFixed(clientHeight) {
       //动态修改样式
       // console.log(this.$refs.leftHeight);
-      this.$refs.leftHeight.$el.style.height = "calc(100vh - 60px)";
+      this.$refs.leftHeight.$el.style.height = "calc(100vh - 100px)";
       this.$refs.leftHeight.$el.style.background = "#ffffff";
-    },
-    leftNext(num) {
-      console.log(num);
-      if (num && num !== 0) {
-        this.$router.push("/step0" + num + "/" + num);
-      }
     }
   }
 };
